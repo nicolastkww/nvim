@@ -46,13 +46,12 @@ return {
       port = '${port}',
       executable = {
         command = 'node',
-        args = { '/Users/nramirez/.local/share/js-debug/src/dapDebugServer.js', '${port}' },
+        args = { '/home/nicolas/.local/share/js-debug/src/dapDebugServer.ts', '${port}' },
       },
     }
     dap.adapters.chrome = {
       type = 'executable',
       command = 'node',
-      args = { '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' }, -- TODO adjust
     }
 
     for _, language in ipairs(js_based_languages) do

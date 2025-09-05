@@ -7,6 +7,7 @@ return {
     ts.setup {
       settings = {
         tsserver_file_preferences = {
+          importModuleSpecifier = 'relative',
           importModuleSpecifierPreference = 'relative',
           importModuleSpecifierEnding = 'minimal',
         },
