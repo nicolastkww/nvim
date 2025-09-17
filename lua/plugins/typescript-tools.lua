@@ -1,7 +1,6 @@
 return {
   'pmizio/typescript-tools.nvim',
   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-  opts = {},
   config = function()
     local ts = require 'typescript-tools'
     ts.setup {
@@ -10,6 +9,8 @@ return {
           importModuleSpecifierPreference = 'relative',
           importModuleSpecifierEnding = 'minimal',
         },
+        complete_function_calls = false,
+        include_completions_with_insert_text = true,
       },
     }
   end,
