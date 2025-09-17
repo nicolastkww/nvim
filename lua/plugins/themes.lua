@@ -9,7 +9,6 @@ return {
     'rebelot/kanagawa.nvim',
     config = function()
       require('kanagawa').setup {
-        compile = true, -- enable compiling the colorscheme
         undercurl = true, -- enable undercurls
         commentStyle = { italic = true },
         functionStyle = { bold = true },
@@ -55,6 +54,7 @@ return {
           light = 'lotus',
         },
       }
+      vim.cmd.colorscheme 'kanagawa'
     end,
   },
   {
@@ -71,7 +71,7 @@ return {
           light = 'latte',
           dark = 'mocha',
         },
-        transparent_background = true, -- disables setting the background color.
+        transparent_background = false, -- disables setting the background color.
         show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
         term_colors = true, -- sets terminal colors (e.g. `g:terminal_color_0`
         dim_inactive = {
@@ -113,7 +113,6 @@ return {
           -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
         },
       }
-      vim.cmd.colorscheme 'catppuccin'
     end,
   },
 
@@ -131,7 +130,9 @@ return {
       -- vim.cmd.colorscheme 'tokyonight'
 
       -- vim.cmd.colorscheme 'nord'
-      vim.cmd.colorscheme 'catppuccin-frappe'
+      --
+      -- vim.cmd.colorscheme 'catppuccin-frappe'
+      --
 
       -- You can configure highlights by doing something like:
       -- vim.cmd.hi 'Comment gui=none'
@@ -162,7 +163,7 @@ return {
 
         colors = {},
         options = {
-          transparency = true,
+          transparency = false,
         },
       }
     end,
