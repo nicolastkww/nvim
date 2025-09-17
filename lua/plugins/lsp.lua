@@ -139,6 +139,7 @@ return {
       local servers = {
         jsonls = {
           capabilities = capabilities,
+          filetypes = { 'json', 'jsonc' },
         },
         eslint = {
           cmd = { 'vscode-eslint-language-server', '--stdio' },
@@ -238,6 +239,10 @@ return {
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
+      vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+        pattern = '*.json',
+        command = 'set filetype=jsonc',
+      })
       vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
         pattern = '.env.*',
         command = 'set filetype=sh',
