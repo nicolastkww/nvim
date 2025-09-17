@@ -100,6 +100,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
     pcall(require('telescope').load_extension, 'live_grep_args')
+    pcall(require('telescope').load_extension, 'git_worktree')
 
     -- See `:help telescope.builtin`
     local builtin = require 'telescope.builtin'
@@ -126,6 +127,10 @@ return { -- Fuzzy Finder (files, lsp, etc)
         previewer = false,
       })
     end, { desc = '[/] Fuzzily search in current buffer' })
+
+    vim.keymap.set('n', '<leader>sW', function()
+      require('telescope').extensions.git_worktree.git_worktree()
+    end, { desc = '[S]eact Git [W]orktree' })
 
     -- It's also possible to pass additional configuration options.
     --  See `:help telescope.builtin.live_grep()` for information about particular keys
