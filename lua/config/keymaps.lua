@@ -54,3 +54,12 @@ end, { desc = 'Open small terminal' })
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+-- Copy relative path
+local function copy_relative_path()
+  local relative_path = vim.fn.expand '%'
+  vim.fn.setreg('+', relative_path)
+  vim.notify('Relative path copied to clipboard: ' .. relative_path)
+end
+
+vim.keymap.set('n', '<leader>rp', copy_relative_path, { desc = 'Copy relative path to clipboard' })

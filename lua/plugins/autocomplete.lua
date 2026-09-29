@@ -28,6 +28,7 @@ return { -- Autocompletion
             luasnip.filetype_extend('html', { 'loremipsum' })
             luasnip.filetype_extend('html', { 'html' })
             luasnip.filetype_extend('typescriptreact', { 'html' })
+            luasnip.filetype_extend('js', { 'html' })
           end,
         },
       },

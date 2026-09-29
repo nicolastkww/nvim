@@ -54,7 +54,7 @@ return {
           light = 'lotus',
         },
       }
-      vim.cmd.colorscheme 'kanagawa'
+      vim.cmd.colorscheme 'onedark'
     end,
   },
   {
@@ -116,56 +116,78 @@ return {
     end,
   },
 
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'olimorris/onedarkpro.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    init = function()
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      -- vim.cmd.colorscheme 'tokyonight'
-
-      -- vim.cmd.colorscheme 'nord'
-      --
-      -- vim.cmd.colorscheme 'catppuccin-frappe'
-      --
-
-      -- You can configure highlights by doing something like:
-      -- vim.cmd.hi 'Comment gui=none'
-    end,
+  -- { -- You can easily change to a different colorscheme.
+  --   -- Change the name of the colorscheme plugin below, and then
+  --   -- change the command in the config to whatever the name of that colorscheme is.
+  --   --
+  --   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+  --   'olimorris/onedarkpro.nvim',
+  --   priority = 1000, -- Make sure to load this before all the other start plugins.
+  --   init = function()
+  --     -- Load the colorscheme here.
+  --     -- Like many other themes, this one has different styles, and you could load
+  --     -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+  --     -- vim.cmd.colorscheme 'tokyonight'
+  --
+  --     -- vim.cmd.colorscheme 'nord'
+  --     --
+  --     -- vim.cmd.colorscheme 'catppuccin-frappe'
+  --     --
+  --
+  --     -- You can configure highlights by doing something like:
+  --     -- vim.cmd.hi 'Comment gui=none'
+  --   end,
+  --   config = function()
+  --     require('onedarkpro').setup {
+  --       highlights = {
+  --         Comment = { italic = true },
+  --         Directory = { bold = true },
+  --         ErrorMsg = { italic = true, bold = true },
+  --       },
+  --
+  --       styles = {
+  --         types = 'NONE',
+  --         methods = 'NONE',
+  --         numbers = 'NONE',
+  --         strings = 'NONE',
+  --         comments = 'italic',
+  --         keywords = 'bold',
+  --         constants = 'NONE',
+  --         functions = 'italic',
+  --         operators = 'NONE',
+  --         variables = 'NONE',
+  --         parameters = 'NONE',
+  --         conditionals = 'bold',
+  --         virtual_text = 'NONE',
+  --       },
+  --
+  --       colors = {},
+  --       options = {
+  --         transparency = false,
+  --       },
+  --     }
+  --   end,
+  -- },
+  {
+    'navarasu/onedark.nvim',
+    priority = 1000,
     config = function()
-      require('onedarkpro').setup {
-        highlights = {
-          Comment = { italic = true },
-          Directory = { bold = true },
-          ErrorMsg = { italic = true, bold = true },
-        },
-
-        styles = {
-          types = 'NONE',
-          methods = 'NONE',
-          numbers = 'NONE',
-          strings = 'NONE',
-          comments = 'italic',
-          keywords = 'bold',
-          constants = 'NONE',
-          functions = 'italic',
-          operators = 'NONE',
-          variables = 'NONE',
-          parameters = 'NONE',
-          conditionals = 'bold',
-          virtual_text = 'NONE',
-        },
-
-        colors = {},
-        options = {
-          transparency = false,
-        },
+      require('onedark').setup {
+        style = 'darker',
+        transparent = false,
+        toggle_style_key = '<leader>tc',
       }
+      vim.o.background = 'dark'
+      vim.api.nvim_create_autocmd('ColorScheme', {
+        pattern = 'onedark',
+        callback = function()
+          local palette = require 'onedark.palette'
+          local style = vim.g.onedark_config.style or 'dark'
+          local bg_d = palette[style].bg_d
+          vim.api.nvim_set_hl(0, 'SnacksPickerList', { bg = bg_d })
+          vim.api.nvim_set_hl(0, 'SnacksPicker', { bg = bg_d })
+        end,
+      })
     end,
   },
 }

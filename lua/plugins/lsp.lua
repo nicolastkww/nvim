@@ -163,12 +163,6 @@ return {
             },
             debug = true,
           },
-          on_attach = function(_, bufnr)
-            vim.api.nvim_create_autocmd('BufWritePre', {
-              buffer = bufnr,
-              command = 'EslintFixAll',
-            })
-          end,
         },
         astro = {
           cmd = { 'astro-ls', '--stdio' },
@@ -258,7 +252,23 @@ return {
         pattern = { 'docker-compose.*' },
         command = 'set filetype=yaml.docker-compose',
       })
+      local base_on_attach = vim.lsp.config.eslint.on_attach
 
+      vim.lsp.config('eslint', {
+        on_attach = function(client, bufnr)
+          if not base_on_attach then
+            return
+          end
+
+          base_on_attach(client, bufnr)
+          vim.api.nvim_create_autocmd('BufWritePre', {
+            buffer = bufnr,
+            callback = function()
+              pcall(vim.cmd, 'LspEslintFixAll')
+            end,
+          })
+        end,
+      })
       -- require('mason-lspconfig').setup {
       --   handlers = {
       --

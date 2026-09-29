@@ -22,3 +22,8 @@ vim.g.loaded_ruby_provider = 0
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
+
+vim.opt.expandtab = true -- Convert tabs to spaces
+vim.opt.tabstop = 4 -- Number of spaces a tab counts for
+vim.opt.shiftwidth = 4 -- Number of spaces for indentation
+vim.opt.softtabstop = 4 -- Number of spaces a tab counts for in editing

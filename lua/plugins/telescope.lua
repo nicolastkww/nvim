@@ -1,7 +1,10 @@
 return { -- Fuzzy Finder (files, lsp, etc)
   'nvim-telescope/telescope.nvim',
   event = 'VimEnter',
-  branch = '0.1.x',
+  ---
+  --- TODO: remove this when a new release of lazy vim is out
+  --- https://github.com/nvim-telescope/telescope.nvim/issues/3469#issuecomment-3555630851
+  version = '^0.1.9',
   dependencies = {
     'nvim-lua/plenary.nvim',
     { -- If encountering errors, see telescope-fzf-native README for installation instructions
