@@ -207,6 +207,7 @@ return {
         },
         yamlls = {},
         dockerls = {},
+        vtsls = {},
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
@@ -252,6 +253,38 @@ return {
         pattern = { 'docker-compose.*' },
         command = 'set filetype=yaml.docker-compose',
       })
+      local ts_settings = {
+        preferences = {
+          importModuleSpecifier = 'relative',
+          importModuleSpecifierEnding = 'minimal',
+        },
+        suggest = {
+          completeFunctionCalls = false,
+        },
+      }
+      -- vtsls asks the client to run this VS Code-only command after organizing imports
+      vim.lsp.commands['_typescript.didOrganizeImports'] = function() end
+      vim.lsp.config('vtsls', {
+        settings = {
+          typescript = ts_settings,
+          javascript = ts_settings,
+        },
+        on_attach = function(_, bufnr)
+          local map = function(keys, kind, desc)
+            vim.keymap.set('n', keys, function()
+              vim.lsp.buf.code_action { context = { only = { kind }, diagnostics = {} }, apply = true }
+            end, { buffer = bufnr, desc = 'TS: ' .. desc })
+          end
+
+          map('<leader>ia', 'source.addMissingImports.ts', '[I]mports [A]dd missing')
+          map('<leader>io', 'source.organizeImports', '[I]mports [O]rganize')
+          map('<leader>is', 'source.sortImports', '[I]mports [S]ort')
+          map('<leader>iu', 'source.removeUnusedImports', '[I]mports remove [U]nused')
+          map('<leader>iU', 'source.removeUnused.ts', 'Remove all [U]nused code')
+          map('<leader>if', 'source.fixAll.ts', '[F]ix all')
+        end,
+      })
+
       local base_on_attach = vim.lsp.config.eslint.on_attach
 
       vim.lsp.config('eslint', {
